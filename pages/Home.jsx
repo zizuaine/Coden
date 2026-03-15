@@ -1,13 +1,17 @@
-import React from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const HomePage = () => {
+
+    const [roomId, setRoomId] = useState('');
+    const [username, setUsername] = useState('')
 
     const createNewRoom = (e) => {
         e.preventDefault();
 
         const id = uuidv4();
-        console.log(id)
+        setRoomId(id);
+
     }
 
     return (
@@ -44,13 +48,17 @@ const HomePage = () => {
                         <input
                             type="text"
                             placeholder="ROOM ID"
+                            value={roomId}
                             className="inputBox"
+                            onChange={(e) => setRoomId(e.currentTarget.value)}
                         />
 
                         <input
                             type="text"
                             placeholder="USERNAME"
                             className="inputBox"
+                            value={username}
+                            onChange={(e) => setUsername(e.currentTarget.value)}
                         />
                     </div>
 
@@ -62,7 +70,11 @@ const HomePage = () => {
                         <div className="hp-or-line" />
                     </div>
 
-                    <button onClick={createNewRoom} className="btn hp-createBtn">+ Create new room</button>
+                    <button
+                        onClick={createNewRoom}
+                        className="btn hp-createBtn"
+                    >+ Create new room
+                    </button>
                 </div>
 
             </div>
