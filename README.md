@@ -1,16 +1,49 @@
-# React + Vite
+# Coden – Realtime Collaborative Code Editor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Coden is a realtime collaborative code editor built using React, Node.js, Express, and Socket.io.  
+Users can create a room, join using a Room ID, and edit code together in realtime.
 
-Currently, two official plugins are available:
+This project is being built from scratch as a full-stack application.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Landing page with room join / create UI
+- Unique Room ID based navigation
+- Editor page routing
+- Realtime collaboration (in progress)
+- Clean custom UI (not tutorial UI)
 
-## Expanding the ESLint configuration
+Planned features:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- WebSocket realtime sync (Socket.io)
+- Authentication (JWT)
+- MongoDB room storage
+- Save / load code
+- Multi-user collaboration
+- Deployment (Vercel + Render)
+
+---
+
+## 🛠 Tech Stack
+
+Frontend:
+- React
+- React Router
+- CSS
+
+Backend (planned):
+- Node.js
+- Express
+- Socket.io
+
+Database (planned):
+- MongoDB
+
+Auth (planned):
+- JWT
+
+---
+
+## 📂 Project Structure
