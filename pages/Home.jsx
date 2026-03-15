@@ -2,6 +2,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import EditorPage from "./EditorPage";
 
 const HomePage = () => {
     const navigate = useNavigate()
@@ -29,10 +30,13 @@ const HomePage = () => {
                 username
             }
         })
+
     }
 
     const handleInputEnter = (e) => {
-        console.log(e.code)
+        if (e.code === "Enter") {
+            joinRoom();
+        }
     }
 
     return (
@@ -86,7 +90,7 @@ const HomePage = () => {
                     </div>
 
                     <button
-                        className="btn hp-joinBtn"
+                        className="hp-joinBtn"
                         onClick={joinRoom}
                     >
                         Join
@@ -100,7 +104,7 @@ const HomePage = () => {
 
                     <button
                         onClick={createNewRoom}
-                        className="btn hp-createBtn"
+                        className="hp-createBtn"
                     >+ Create new room
                     </button>
                 </div>
