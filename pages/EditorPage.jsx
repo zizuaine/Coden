@@ -1,7 +1,13 @@
 import React from "react"
 
 const EditorPage = () => {
-    return <div>Editor Page</div>
+    return (
+        <div className="main-wrapper">
+            <div className="left-panel">
+
+            </div>
+        </div>
+    )
 }
 
 export default EditorPage;

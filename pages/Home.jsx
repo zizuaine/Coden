@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+    const navigate = useNavigate()
 
     const [roomId, setRoomId] = useState('');
     const [username, setUsername] = useState('')
@@ -11,7 +14,25 @@ const HomePage = () => {
 
         const id = uuidv4();
         setRoomId(id);
+        toast.success("Created a new room");
+    }
 
+    const joinRoom = () => {
+        if (!roomId.trim || !username) {
+            toast.error("Invalid Credentials")
+            return;
+        }
+
+        //redirect 
+        navigate(`/editor/${roomId}`, {
+            state: {
+                username
+            }
+        })
+    }
+
+    const handleInputEnter = (e) => {
+        console.log(e.code)
     }
 
     return (
@@ -51,6 +72,7 @@ const HomePage = () => {
                             value={roomId}
                             className="inputBox"
                             onChange={(e) => setRoomId(e.currentTarget.value)}
+                            onKeyUp={handleInputEnter}
                         />
 
                         <input
@@ -59,10 +81,16 @@ const HomePage = () => {
                             className="inputBox"
                             value={username}
                             onChange={(e) => setUsername(e.currentTarget.value)}
+                            onKeyUp={handleInputEnter}
                         />
                     </div>
 
-                    <button className="btn hp-joinBtn">Join</button>
+                    <button
+                        className="btn hp-joinBtn"
+                        onClick={joinRoom}
+                    >
+                        Join
+                    </button>
 
                     <div className="hp-or-row">
                         <div className="hp-or-line" />
