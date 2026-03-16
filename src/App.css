@@ -223,6 +223,7 @@
     /* takes all remaining height after topbar */
     display: flex;
     overflow: hidden;
+    min-height: 0;
 }
 
 .left-panel {
@@ -295,4 +296,21 @@
 .LeaveBtn:hover {
     background: rgba(239, 68, 68, 0.18);
     border-color: rgba(239, 68, 68, 0.4);
+}
+
+.editorWrap {
+    flex: 1;
+    overflow: hidden;
+    min-height: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.CodeMirror {
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+    padding-top: 20px;
+    line-height: 24px;
+
 }

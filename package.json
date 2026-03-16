@@ -10,12 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "codemirror": "^6.0.2",
+    "codemirror": "^5.65.21",
+    "express": "^5.2.1",
     "react": "^19.2.4",
     "react-avatar": "^5.0.4",
     "react-dom": "^19.2.4",
     "react-hot-toast": "^2.6.0",
     "react-router-dom": "^7.13.1",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3",
     "uuid": "^13.0.0"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Client from "../src/components/Client";
+import Editor from "../src/components/Editor"
 
 const EditorPage = () => {
     const [clients, setClients] = useState([
@@ -40,8 +41,8 @@ const EditorPage = () => {
                     </div>
                 </div>
 
-                <div className="textArea">
-
+                <div className="editorWrap" >
+                    <Editor />
                 </div>
             </div>
         </div>
