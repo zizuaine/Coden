@@ -26,12 +26,26 @@ io.on("connection", (socket) => {
         socket.join(roomId); //client joins the room
         const clients = getAllConnectedClients(roomId)
         clients.forEach(({ socketId }) => {
-            io.to(socket).emit(Actions.JOINED, {
+            io.to(socketId).emit(Actions.JOINED, {
                 clients,
                 username,
-                socketId: socketId.id,
+                socketId: socket.id,
             })
         })
+    });
+
+
+
+    socket.on("disconnecting", () => {
+        const rooms = [...socket.rooms];
+        rooms.forEach((roomId) => {
+            socket.in(roomId).emit(Actions.DISCONNECTED, {
+                socketId: socket.id,
+                username: userSocketMap[socket.id],
+            })
+        })
+        delete userSocketMap[socket.id];
+        socket.leave();
     })
 })
 

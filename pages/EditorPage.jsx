@@ -7,13 +7,10 @@ import Editor from "../src/components/Editor"
 import { createSocket } from "../src/socket";
 import Actions from "../Actions";
 
+
 const EditorPage = () => {
 
-    const [clients, setClients] = useState([
-        { socketId: 1, username: 'dikshant' },
-        { socketId: 2, username: 'kashyap' },
-    ])
-
+    const [clients, setClients] = useState([])
 
     const socketRef = useRef(null);
     const location = useLocation();
@@ -39,10 +36,31 @@ const EditorPage = () => {
             });
 
             //listening for joined event
-            socketRef.current.on(Actions.JOINED, ({ clients, username, socketId }))
+            socketRef.current.on(Actions.JOINED, ({ clients, username, socketId }) => {
+                if (username !== location.state?.username) {
+                    toast.success(`${username} has joined the room.`)
+                    console.log(username)
+                }
+                setClients(clients)
+            });
+
+            //listening for disconnected
+            socketRef.current.on(Actions.DISCONNECTED, ({ socketId, username }) => {
+                toast.success(`${username} has left the room.`);
+                setClients(prevClients => (
+                    prevClients.filter(client => client.socketId !== socketId)
+                ))
+            })
 
         };
         start();
+
+        return () => {
+            socketRef.current.off(Actions.JOINED);
+            socketRef.current.off(Actions.DISCONNECTED);
+            socketRef.current.disconnect();
+        }
+
     }, []);
 
     if (!location.state) {
