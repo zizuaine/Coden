@@ -256,6 +256,14 @@
     gap: 14px;
 }
 
+.client {
+    color: #e2eaf4;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+}
+
 .left-lower-container {
     padding: 14px;
     border-top: 1px solid rgba(255, 255, 255, 0.06);

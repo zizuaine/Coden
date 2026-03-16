@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
 
-export const initSocket = async () => {
+export const createSocket = async () => {
     const options = {
         forceNew: true,
         reconnectionAttempts: Infinity,
