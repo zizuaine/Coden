@@ -99,7 +99,10 @@ const EditorPage = () => {
                 </div>
 
                 <div className="editorWrap" >
-                    <Editor />
+                    <Editor
+                        socketRef={socketRef}
+                        roomId={roomId}
+                    />
                 </div>
             </div>
         </div>
