@@ -7,7 +7,7 @@ import 'codemirror/addon/edit/closetag'
 import 'codemirror/addon/edit/closebrackets'
 import Actions from "../../Actions"
 
-const Editor = ({ socketRef, roomId }) => {
+const Editor = ({ socketRef, roomId, onCodeChange }) => {
 
     const editorRef = useRef(null);
 
@@ -24,6 +24,7 @@ const Editor = ({ socketRef, roomId }) => {
         editorRef.current.on("change", (instance, changes) => {
             const { origin } = changes;
             const code = instance.getValue();
+            onCodeChange(code)
 
             if (origin !== "setValue") {
                 socketRef.current.emit(Actions.CODE_CHANGE, {

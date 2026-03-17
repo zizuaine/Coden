@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 /* ── Favicon ─────────────────────────────────────────────────────────────── */
 const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#03060f"/><path d="M16 2 L18.4 13.6 L30 11 L20 16 L29 23 L17.2 18.4 L16 30 L14.8 18.4 L3 23 L12 16 L2 11 L13.6 13.6 Z" fill="#e2eaf4"/></svg>`;
@@ -361,6 +362,7 @@ const STEPS = [
 
 export default function LandingPage() {
   const styleRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!styleRef.current) {
@@ -381,7 +383,7 @@ export default function LandingPage() {
     };
   }, []);
 
-  const handleSignIn = () => { window.location.href = "/signin"; };
+  const handleSignIn = () => { navigate("/sign-in") };
 
   return (
     <div style={{ width: "100vw", minHeight: "100vh", background: "#010103", overflowX: "hidden" }}>
@@ -533,7 +535,7 @@ export default function LandingPage() {
         <h2>Your team's new<br /><span>home for code.</span></h2>
         <p>Join 12,000+ developers building together in real time.</p>
         <div className="cta-btns">
-          <button className="btn-cta">Create a free workspace</button>
+          <button className="btn-cta" onClick={handleSignIn}>Create a free workspace</button>
           <button className="btn-cta-ghost" onClick={handleSignIn}>Sign in to existing account</button>
         </div>
       </div>

@@ -14,6 +14,7 @@ const EditorPage = () => {
 
     const socketRef = useRef(null);
     const location = useLocation();
+    const codeRef = useRef(null)
     const { roomId } = useParams();
     const RedirectNavigator = useNavigate();
 
@@ -42,6 +43,10 @@ const EditorPage = () => {
                     console.log(username)
                 }
                 setClients(clients)
+                socketRef.current.emit(Actions.SYNC_CODE, {
+                    code: codeRef.current,
+                    socketId
+                });
             });
 
             //listening for disconnected
@@ -116,6 +121,7 @@ const EditorPage = () => {
                     <Editor
                         socketRef={socketRef}
                         roomId={roomId}
+                        onCodeChange={({ code }) => codeRef.current = code}
                     />
                 </div>
             </div>
