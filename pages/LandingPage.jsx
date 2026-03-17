@@ -419,7 +419,7 @@ export default function LandingPage() {
         </a>
         <div className="nav-right">
           <button className="btn-nav-ghost" onClick={handleSignIn}>Sign in →</button>
-          <button className="btn-nav-fill">Get started free</button>
+          <button className="btn-nav-fill" onClick={handleSignIn} >Get started free</button>
         </div>
       </nav>
 
@@ -438,7 +438,7 @@ export default function LandingPage() {
             and AI-assisted coding — built for teams who move fast.
           </p>
           <div className="hero-cta">
-            <button className="btn-hero">Start coding free</button>
+            <button onClick={handleSignIn} className="btn-hero">Start coding free</button>
           </div>
         </div>
 
