@@ -5,15 +5,23 @@ import { Server } from "socket.io"
 import Actions from "./Actions.js";
 
 const app = express();
+
+app.use(express.static('dist'));
+
 app.use((req, res, next) => {
     res.sendFile(path.join(__dirname, "dist", "index.html"))
 })
 
 
 const server = http.createServer(app);
-const io = new Server(server)
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+});
 
-app.use(express.static('dist'));
+
 
 const userSocketMap = {}
 
