@@ -3,7 +3,9 @@
 Coden is a realtime collaborative code editor built using React, Node.js, Express, and Socket.io.  
 Users can create a room, join using a Room ID, and edit code together in realtime.
 
-This project is being built from scratch as a full-stack application.
+Built while learning realtime apps using Socket.io.
+Based on a tutorial, but extended with my own UI and improvements.
+Implemented rooms, client sync, disconnect handling, and editor integration.
 
 ---
 

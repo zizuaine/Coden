@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import toast from "react-hot-toast";
-import { useLocation, useNavigate, Navigate } from "react-router-dom";
+import { useLocation, useNavigate, Navigate, redirect } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Client from "../src/components/Client";
 import Editor from "../src/components/Editor"
@@ -15,7 +15,7 @@ const EditorPage = () => {
     const socketRef = useRef(null);
     const location = useLocation();
     const { roomId } = useParams();
-    const ReactNavigator = useNavigate();
+    const RedirectNavigator = useNavigate();
 
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const EditorPage = () => {
             function handleErrors(e) {
                 console.log("socket error", e);
                 toast.error("Socket connection failed, Please try again later");
-                ReactNavigator("/home")
+                RedirectNavigator("/home")
             }
 
             socketRef.current.emit(Actions.JOIN, {
@@ -63,6 +63,20 @@ const EditorPage = () => {
 
     }, []);
 
+    const copyRoomId = async () => {
+        try {
+            await navigator.clipboard.writeText(roomId);
+            toast.success("Room ID copied!")
+        } catch (err) {
+            toast.error("try again");
+            console.log(err)
+        }
+    }
+
+    const leaveRoom = () => {
+        RedirectNavigator("/home")
+    }
+
     if (!location.state) {
         return <Navigate to="/" />
     }
@@ -93,8 +107,8 @@ const EditorPage = () => {
                         </div>
                     </div>
                     <div className="left-lower-container">
-                        <button className="btn copyBtn">Copy ROOM ID</button>
-                        <button className="btn LeaveBtn">Leave room</button>
+                        <button onClick={copyRoomId} className="btn copyBtn">Copy ROOM ID</button>
+                        <button onClick={leaveRoom} className="btn LeaveBtn">Leave room</button>
                     </div>
                 </div>
 
