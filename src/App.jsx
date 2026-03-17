@@ -34,6 +34,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
+          <Route path="/sign-in" element={<SignInPage />}></Route>
           <Route path="/home" element={<HomePage />}></Route>
           <Route path="/editor/:roomId" element={<EditorPage />}></Route>
         </Routes>
