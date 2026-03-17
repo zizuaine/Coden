@@ -1,51 +1,64 @@
-# Coden – Realtime Collaborative Code Editor
+# Coden — Real-Time Collaborative Code Editor
 
-Coden is a realtime collaborative code editor built using React, Node.js, Express, and Socket.io.  
-Users can create a room, join using a Room ID, and edit code together in realtime.
+Coden is a real-time collaborative code editor built using **React, Socket.io, Node.js, and CodeMirror**.
+The project allows multiple users to join the same room and edit code together with live synchronization.
 
-Built while learning realtime apps using Socket.io.
-Based on a tutorial, but extended with my own UI and improvements.
-Implemented rooms, client sync, disconnect handling, and editor integration.
+This project was built while learning real-time communication and full-stack development concepts, and extended with custom UI, additional features, and backend improvements.
 
 ---
 
 ## 🚀 Features
 
-- Landing page with room join / create UI
-- Unique Room ID based navigation
-- Editor page routing
-- Realtime collaboration (in progress)
-- Clean custom UI (not tutorial UI)
+* Real-time code collaboration using Socket.io
+* Room-based editing sessions
+* Live user join / leave notifications
+* Connected users list
+* Code synchronization across clients
+* Custom UI built with React
+* Code editor powered by CodeMirror
+* Clean socket event handling with proper cleanup
 
-Planned features:
+In Progress:
 
-- WebSocket realtime sync (Socket.io)
-- Authentication (JWT)
-- MongoDB room storage
-- Save / load code
-- Multi-user collaboration
-- Deployment (Vercel + Render)
+* Authentication (JWT / Session)
+* MongoDB database integration
+* Save & load code per room
+* User accounts
+* Persistent rooms
 
 ---
 
-## 🛠 Tech Stack
+## 🛠️ Tech Stack
 
 Frontend:
-- React
-- React Router
-- CSS
 
-Backend (planned):
-- Node.js
-- Express
-- Socket.io
+* React (Vite)
+* CodeMirror
+* React Router
+* React Hot Toast
 
-Database (planned):
-- MongoDB
+Backend:
 
-Auth (planned):
-- JWT
+* Node.js
+* Express
+* Socket.io
 
 ---
 
-## 📂 Project Structure
+## 📚 Learning Goals
+
+This project was created to understand:
+
+* WebSockets and real-time communication
+* Socket.io rooms and events
+* React hooks and refs in complex apps
+* Handling event listeners safely
+* Preventing infinite loops in sync logic
+* Building multi-user applications
+* Backend–frontend communication
+
+---
+
+## 👨‍💻 Author
+
+Built by Dikshant Kashyap while learning full-stack development and real-time systems.
