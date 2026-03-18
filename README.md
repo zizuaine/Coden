@@ -7,6 +7,14 @@ This project was built while learning real-time communication and full-stack dev
 
 ---
 
+## 🚀 Live Demo
+
+Frontend (Vercel):
+https://coden-beryl.vercel.app
+
+Backend (Render):
+https://coden-backend.onrender.com
+
 ## 🚀 Features
 
 * Real-time code collaboration using Socket.io
@@ -44,6 +52,12 @@ Backend:
 * Socket.io
 
 ---
+
+## 📦 Installation
+git clone https://github.com/zizuaine/coden
+cd coden
+npm install
+npm run dev
 
 ## 📚 Learning Goals
 
