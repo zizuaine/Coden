@@ -91,7 +91,7 @@ const EditorPage = () => {
         <div className="main-wrapper">
             <div className="ed-topBar">
                 <div className="ed-logo">
-                    <img src="/Coden.png" alt="" />
+                    <img src="/coden.png" alt="" />
                 </div>
                 <div className="ed-room-id">
                     {roomId}
