@@ -9,12 +9,15 @@
     "server:dev": "nodemon server.js",
     "server:prod": "node server.js",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.js"
   },
   "dependencies": {
     "codemirror": "^5.65.21",
     "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "mongoose": "^9.3.1",
     "react": "^19.2.4",
     "react-avatar": "^5.0.4",
     "react-dom": "^19.2.4",
@@ -35,5 +38,18 @@
     "globals": "^17.4.0",
     "nodemon": "^3.1.14",
     "vite": "^8.0.0"
-  }
+  },
+  "description": "Coden is a real-time collaborative code editor built using **React, Socket.io, Node.js, and CodeMirror**.\r The project allows multiple users to join the same room and edit code together with live synchronization.",
+  "main": "Actions.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zizuaine/Coden.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zizuaine/Coden/issues"
+  },
+  "homepage": "https://github.com/zizuaine/Coden#readme"
 }

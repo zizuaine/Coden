@@ -1,10 +1,13 @@
 import express from "express"
+import dotenv from "dotenv"
 import cors from "cors";
 import http from "http"
 import path from "path";
 import { Server } from "socket.io"
 import Actions from "./Actions.js";
 import { fileURLToPath } from "url"
+import { connectDB } from "./db.js";
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -79,5 +82,11 @@ io.on("connection", (socket) => {
     })
 })
 
+
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log(`Listening on port ${PORT}`))
+
+connectDB().then(() => {
+    server.listen(PORT, () => {
+        console.log(`Listening on port ${PORT}`);
+    });
+});
