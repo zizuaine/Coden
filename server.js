@@ -1,4 +1,5 @@
 import express from "express"
+import cors from "cors";
 import http from "http"
 import path from "path";
 import { Server } from "socket.io"
@@ -6,9 +7,10 @@ import Actions from "./Actions.js";
 
 const app = express();
 
+app.use(cors())
 app.use(express.static('dist'));
 
-app.use((req, res, next) => {
+app.use("*", (req, res) => {
     res.sendFile(path.join(__dirname, "dist", "index.html"))
 })
 
