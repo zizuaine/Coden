@@ -45,7 +45,7 @@ const HomePage = () => {
 
                 <div className="hp-left">
                     <div className="hp-logo-row">
-                        <img src="/Coden.png" alt="coden-logo" />
+                        <img src="/coden.png" alt="coden-logo" />
                     </div>
 
                     <p className="hp-tagline">
