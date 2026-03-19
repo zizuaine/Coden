@@ -25,12 +25,12 @@ https://coden-backend.onrender.com
 * Custom UI built with React
 * Code editor powered by CodeMirror
 * Clean socket event handling with proper cleanup
+* MongoDB database integration
+* Save & load code per room
 
 In Progress:
 
 * Authentication (JWT / Session)
-* MongoDB database integration
-* Save & load code per room
 * User accounts
 * Persistent rooms
 
