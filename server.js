@@ -7,6 +7,7 @@ import { Server } from "socket.io"
 import Actions from "./Actions.js";
 import { fileURLToPath } from "url"
 import { connectDB } from "./db.js";
+import Code from "./models/code.js"
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url)
@@ -32,22 +33,34 @@ const io = new Server(server, {
 
 
 
-const userSocketMap = {}
+const users = {}
 
 function getAllConnectedClients(roomId) {
     const sockets = io.sockets.adapter.rooms.get(roomId) || []
     return [...sockets].map(socketId => ({
         socketId,
-        username: userSocketMap[socketId]
+        username: users[socketId]
     }));
 }
+
+
+let timers = {}; //will save timers for each room
 
 io.on("connection", (socket) => {
     console.log('socket connected', socket.id);
 
-    socket.on(Actions.JOIN, ({ roomId, username }) => {
-        userSocketMap[socket.id] = username;
+    socket.on(Actions.JOIN, async ({ roomId, username }) => {
+        users[socket.id] = username;
         socket.join(roomId); //client joins the room
+
+        const room = await Code.findOne({ roomId })
+
+        if (room) {
+            socket.emit(Actions.CODE_CHANGE, {
+                code: room.code
+            })
+        }
+
         const clients = getAllConnectedClients(roomId)
         clients.forEach(({ socketId }) => {
             io.to(socketId).emit(Actions.JOINED, {
@@ -58,8 +71,16 @@ io.on("connection", (socket) => {
         })
     });
 
-
     socket.on(Actions.CODE_CHANGE, ({ roomId, code }) => {
+        clearTimeout(timers[roomId]);
+        timers[roomId] = setTimeout(async () => {
+            await Code.findOneAndUpdate(
+                { roomId },
+                { code, updatedAt: Date.now() },
+                { upsert: true }
+            );
+        }, 2000)
+
         socket.in(roomId).emit(Actions.CODE_CHANGE, { code })
     })
 
@@ -74,10 +95,10 @@ io.on("connection", (socket) => {
         rooms.forEach((roomId) => {
             socket.in(roomId).emit(Actions.DISCONNECTED, {
                 socketId: socket.id,
-                username: userSocketMap[socket.id],
+                username: users[socket.id],
             })
         })
-        delete userSocketMap[socket.id];
+        delete users[socket.id];
         socket.leave();
     })
 })
