@@ -16,7 +16,7 @@ const codeSchema = new Schema(
         },
 
         language: {
-            type: stringify,
+            type: String,
             default: "javascript"
         },
 
@@ -27,4 +27,4 @@ const codeSchema = new Schema(
     }
 );
 
-export default mongoose.model("Code", codeSchema)
+export default mongoose.model("Code", codeSchema);
