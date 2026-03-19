@@ -8,15 +8,19 @@ import Actions from "./Actions.js";
 import { fileURLToPath } from "url"
 import { connectDB } from "./db.js";
 import Code from "./models/code.js"
+import authRouter from "./routes/authRoutes.js";
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const app = express();
+app.use(express.json());
 
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'dist')))
+
+app.use("/auth", authRouter)
 
 app.use((req, res) => {
     res.sendFile(path.join(__dirname, "dist", "index.html"))
