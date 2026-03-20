@@ -9,6 +9,8 @@ import { fileURLToPath } from "url"
 import { connectDB } from "./db.js";
 import Code from "./models/code.js"
 import authRouter from "./routes/authRoutes.js";
+import { getJwtSecret } from "./config.js";
+import jwt from "jsonwebtoken"
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url)
@@ -53,26 +55,37 @@ let timers = {}; //will save timers for each room
 io.on("connection", (socket) => {
     console.log('socket connected', socket.id);
 
-    socket.on(Actions.JOIN, async ({ roomId, username }) => {
-        users[socket.id] = username;
-        socket.join(roomId); //client joins the room
+    socket.on(Actions.JOIN, async ({ roomId, username, token }) => {
+        try {
+            if (!token) {
+                return socket.emit("ERROR", "Token missing");
+            }
+            const decoded = jwt.verify(token, getJwtSecret());
 
-        const room = await Code.findOne({ roomId })
+            socket.userId = decoded.id
 
-        if (room) {
-            socket.emit(Actions.CODE_CHANGE, {
-                code: room.code
+            users[socket.id] = username;
+            socket.join(roomId); //client joins the room
+
+            const room = await Code.findOne({ roomId })
+
+            if (room) {
+                socket.emit(Actions.CODE_CHANGE, {
+                    code: room.code
+                })
+            }
+
+            const clients = getAllConnectedClients(roomId)
+            clients.forEach(({ socketId }) => {
+                io.to(socketId).emit(Actions.JOINED, {
+                    clients,
+                    username,
+                    socketId: socket.id,
+                })
             })
+        } catch (err) {
+            socket.emit("ERROR", "Unauthorized");
         }
-
-        const clients = getAllConnectedClients(roomId)
-        clients.forEach(({ socketId }) => {
-            io.to(socketId).emit(Actions.JOINED, {
-                clients,
-                username,
-                socketId: socket.id,
-            })
-        })
     });
 
     socket.on(Actions.CODE_CHANGE, ({ roomId, code }) => {
