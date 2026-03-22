@@ -322,3 +322,94 @@
     line-height: 24px;
 
 }
+
+.auth-wrapper {
+    height: 100vh;
+    background: #010103;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.authContainer {
+    background: #0a0c14;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    padding: 48px 44px;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
+}
+
+.authContainer h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e2eaf4;
+    letter-spacing: -0.3px;
+    margin-bottom: 32px;
+}
+
+.authContainer input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 16px;
+    background: #06070e;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #e2eaf4;
+    outline: none;
+    transition: border-color 0.2s;
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+}
+
+.authContainer input::placeholder {
+    color: rgba(180, 210, 240, 0.28);
+    letter-spacing: 0.07em;
+}
+
+.authContainer input:focus {
+    border-color: #4f8eff;
+}
+
+.authContainer button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 6px;
+    background: #4f8eff;
+    border: none;
+    border-radius: 9px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.authContainer button:hover {
+    background: #3a6aff;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(79, 142, 255, 0.35);
+}
+
+.lf-link {
+    margin-top: 20px;
+    font-size: 13px;
+    color: rgba(180, 210, 240, 0.45);
+    text-align: center;
+}
+
+.lf-registerLink {
+    color: #4f8eff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(79, 142, 255, 0.35);
+    transition: border-color 0.2s;
+}
+
+.lf-registerLink:hover {
+    border-bottom-color: #4f8eff;
+}

@@ -383,8 +383,7 @@ export default function LandingPage() {
     };
   }, []);
 
-  const handleSignIn = () => { navigate("/sign-in") };
-  const handleJoin = () => { navigate("/home") };
+  const handleSignIn = () => { navigate("/login") };
 
   return (
     <div style={{ width: "100vw", minHeight: "100vh", background: "#010103", overflowX: "hidden" }}>
@@ -439,7 +438,7 @@ export default function LandingPage() {
             and AI-assisted coding — built for teams who move fast.
           </p>
           <div className="hero-cta">
-            <button onClick={handleJoin} className="btn-hero">Start coding free</button>
+            <button onClick={handleSignIn} className="btn-hero">Start coding free</button>
           </div>
         </div>
 

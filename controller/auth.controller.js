@@ -84,7 +84,7 @@ export async function authRegisterController(req, res) {
     }
 }
 
-export async function authSignInController(req, res, next) {
+export async function authSignInController(req, res) {
     try {
         const user = await signinService(req.body);
         res.status(200).json({ message: "Signed In succesfully!", ...user })

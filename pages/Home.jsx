@@ -2,13 +2,18 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import EditorPage from "./EditorPage";
+import { Navigate } from "react-router-dom";
 
 const HomePage = () => {
     const navigate = useNavigate()
-
     const [roomId, setRoomId] = useState('');
-    const [username, setUsername] = useState('')
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+        return <Navigate to="/login" />;
+    }
+
+    const username = localStorage.getItem("username") || "";
 
     const createNewRoom = (e) => {
         e.preventDefault();
@@ -19,17 +24,13 @@ const HomePage = () => {
     }
 
     const joinRoom = () => {
-        if (!roomId.trim || !username) {
+        if (!roomId.trim() || !username) {
             toast.error("Invalid Credentials")
             return;
         }
 
         //redirect 
-        navigate(`/editor/${roomId}`, {
-            state: {
-                username
-            }
-        })
+        navigate(`/editor/${roomId}`)
 
     }
 
@@ -84,8 +85,7 @@ const HomePage = () => {
                             placeholder="USERNAME"
                             className="inputBox"
                             value={username}
-                            onChange={(e) => setUsername(e.currentTarget.value)}
-                            onKeyUp={handleInputEnter}
+                            readOnly
                         />
                     </div>
 

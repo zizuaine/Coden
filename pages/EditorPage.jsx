@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import toast from "react-hot-toast";
-import { useLocation, useNavigate, Navigate, redirect } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Client from "../src/components/Client";
 import Editor from "../src/components/Editor"
@@ -9,21 +9,23 @@ import Actions from "../Actions";
 
 
 const EditorPage = () => {
-
     const [clients, setClients] = useState([])
-
     const socketRef = useRef(null);
-    const location = useLocation();
     const codeRef = useRef(null)
     const { roomId } = useParams();
     const RedirectNavigator = useNavigate();
 
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        return <Navigate to="/login" />;
+    }
+
+
+
 
     useEffect(() => {
         const start = async () => {
-            socketRef.current = await createSocket();
-            socketRef.current.on("connect_error", (err) => handleErrors(err));
-            socketRef.current.on("connect_failed", (err) => handleErrors(err));
 
             function handleErrors(e) {
                 console.log("socket error", e);
@@ -31,14 +33,29 @@ const EditorPage = () => {
                 RedirectNavigator("/home")
             }
 
+            socketRef.current = await createSocket();
+            socketRef.current.on("connect_error", (err) => handleErrors(err));
+            socketRef.current.on("connect_failed", (err) => handleErrors(err));
+
+            const token = localStorage.getItem("token");
+            const username = localStorage.getItem("username");
+
+            if (!token || !username) {
+                navigate("/login");
+                return;
+            }
+
             socketRef.current.emit(Actions.JOIN, {
+
                 roomId,
-                username: location.state?.username,
+                username,
+                token
             });
 
             //listening for joined event
             socketRef.current.on(Actions.JOINED, ({ clients, username, socketId }) => {
-                if (username !== location.state?.username) {
+                const myUsername = localStorage.getItem("username")
+                if (username !== myUsername) {
                     toast.success(`${username} has joined the room.`)
                     console.log(username)
                 }
@@ -51,7 +68,7 @@ const EditorPage = () => {
 
             //listening for disconnected
             socketRef.current.on(Actions.DISCONNECTED, ({ socketId, username }) => {
-                toast.success(`${username} has left the room.`);
+                toast(`${username} has left the room.`);
                 setClients(prevClients => (
                     prevClients.filter(client => client.socketId !== socketId)
                 ))
@@ -61,9 +78,9 @@ const EditorPage = () => {
         start();
 
         return () => {
-            socketRef.current.off(Actions.JOINED);
-            socketRef.current.off(Actions.DISCONNECTED);
-            socketRef.current.disconnect();
+            socketRef.current?.off(Actions.JOINED);
+            socketRef.current?.off(Actions.DISCONNECTED);
+            socketRef.current?.disconnect();
         }
 
     }, []);
@@ -82,9 +99,6 @@ const EditorPage = () => {
         RedirectNavigator("/home")
     }
 
-    if (!location.state) {
-        return <Navigate to="/" />
-    }
 
 
     return (
