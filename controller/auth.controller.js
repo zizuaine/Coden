@@ -68,9 +68,11 @@ async function signinService({ email, password }) {
 
 export async function authRegisterController(req, res) {
     try {
+        console.log("register hit:", req.body)
         const parsed = signupSchema.safeParse(req.body);
 
         if (!parsed.success) {
+            console.log("validation failed:", parsed.error)
             return res.status(400).json(parsed.error);
         }
         await registerService(parsed.data);
@@ -78,6 +80,7 @@ export async function authRegisterController(req, res) {
             message: "Signed Up succesfully!"
         })
     } catch (err) {
+        console.log("register error:", err.message)
         res.status(err.statusCode || 500).json({
             message: err.message || "Something went wrong"
         });
