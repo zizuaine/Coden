@@ -27,29 +27,30 @@ const EditorPage = () => {
     useEffect(() => {
         const start = async () => {
 
+            socketRef.current = await createSocket();
+
             function handleErrors(e) {
                 console.log("socket error", e);
                 toast.error("Socket connection failed, Please try again later");
                 RedirectNavigator("/home")
             }
 
-            socketRef.current = await createSocket();
             socketRef.current.on("connect_error", (err) => handleErrors(err));
             socketRef.current.on("connect_failed", (err) => handleErrors(err));
 
-            const token = localStorage.getItem("token");
-            const username = localStorage.getItem("username");
 
-            if (!token || !username) {
-                navigate("/login");
-                return;
-            }
 
-            socketRef.current.emit(Actions.JOIN, {
+            socketRef.current.on("connect", () => {
+                console.log("connected");
 
-                roomId,
-                username,
-                token
+                const token = localStorage.getItem("token");
+                const username = localStorage.getItem("username");
+
+                socketRef.current.emit(Actions.JOIN, {
+                    roomId,
+                    username,
+                    token
+                });
             });
 
             //listening for joined event
