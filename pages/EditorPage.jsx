@@ -11,7 +11,8 @@ import Actions from "../Actions";
 const EditorPage = () => {
     const [clients, setClients] = useState([])
     const socketRef = useRef(null);
-    const codeRef = useRef(null)
+    const codeRef = useRef(null);
+    const [socket, setSocket] = useState(null);
     const { roomId } = useParams();
     const RedirectNavigator = useNavigate();
 
@@ -28,6 +29,7 @@ const EditorPage = () => {
         const start = async () => {
 
             socketRef.current = await createSocket();
+            setSocket(socketRef.current);
 
             function handleErrors(e) {
                 console.log("socket error", e);
@@ -134,6 +136,7 @@ const EditorPage = () => {
 
                 <div className="editorWrap" >
                     <Editor
+                        socket={socket}
                         socketRef={socketRef}
                         roomId={roomId}
                         onCodeChange={(code) => codeRef.current = code}

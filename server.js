@@ -19,7 +19,10 @@ const __dirname = path.dirname(__filename)
 const app = express();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+    origin: "https://coden-backend.onrender.com",
+    credentials: true
+}));
 
 app.use("/auth", authRouter)
 
@@ -105,7 +108,6 @@ io.on("connection", (socket) => {
                 { upsert: true }
             );
 
-            console.log("Saved:", result);
         }, 2000)
 
         socket.in(roomId).emit(Actions.CODE_CHANGE, { code })
