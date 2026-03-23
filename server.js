@@ -89,6 +89,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on(Actions.CODE_CHANGE, ({ roomId, code }) => {
+        console.log("Saving code for room:", roomId)
         clearTimeout(timers[roomId]);
         timers[roomId] = setTimeout(async () => {
             await Code.findOneAndUpdate(
@@ -96,6 +97,8 @@ io.on("connection", (socket) => {
                 { code, updatedAt: Date.now() },
                 { upsert: true }
             );
+
+            console.log("Saved:", result);
         }, 2000)
 
         socket.in(roomId).emit(Actions.CODE_CHANGE, { code })

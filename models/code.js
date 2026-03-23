@@ -27,4 +27,8 @@ const codeSchema = new Schema(
     }
 );
 
-export default mongoose.model("Code", codeSchema);
+export default mongoose.model(
+    "Code",
+    codeSchema,
+    "codes"
+);
