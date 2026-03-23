@@ -16,18 +16,5 @@ export const createSocket = async () => {
 
         autoConnect: true,
     });
-
-    socket.on("connect", () => {
-        console.log("socket connected", socket.id);
-    });
-
-    socket.on("disconnect", (reason) => {
-        console.log("socket disconnected:", reason);
-    });
-
-    socket.on("reconnect", () => {
-        console.log("socket reconnected");
-    });
-
     return socket;
 };
