@@ -30,11 +30,14 @@ app.use((req, res) => {
 });
 
 const server = http.createServer(app);
+
 const io = new Server(server, {
     cors: {
         origin: "*",
-        methods: ["GET", "POST"]
-    }
+        methods: ["GET", "POST"],
+        credentials: true
+    },
+    transports: ["websocket", "polling"]
 });
 
 
@@ -126,7 +129,7 @@ io.on("connection", (socket) => {
 const PORT = process.env.PORT || 5000;
 
 connectDB().then(() => {
-    server.listen(PORT, () => {
+    server.listen(PORT, "0.0.0.0", () => {
         console.log(`Listening on port ${PORT}`);
     });
 });

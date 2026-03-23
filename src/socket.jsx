@@ -1,12 +1,13 @@
-import { io } from 'socket.io-client';
+import { io } from "socket.io-client";
 
 export const createSocket = async () => {
-    const options = {
-        forceNew: true,
+
+    const socket = io(import.meta.env.VITE_BACKEND_URL, {
+        transports: ["websocket", "polling"],
         reconnectionAttempts: Infinity,
         timeout: 10000,
-        transports: ["websocket"],
-    };
+        withCredentials: true,
+    });
 
-    return io(import.meta.env.VITE_BACKEND_URL, options)
-}
+    return socket;
+};
