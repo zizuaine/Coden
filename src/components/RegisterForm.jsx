@@ -13,6 +13,7 @@ const RegisterForm = () => {
 
     const handleRegister = async () => {
         try {
+            console.log(import.meta.env.VITE_BACKEND_URL)
             await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/register`,
                 {
                     email,

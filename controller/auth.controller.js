@@ -43,7 +43,7 @@ async function signinService({ email, password }) {
 
     const passwordMatch = await bcrypt.compare(password, user.password);
 
-    if (!passwordMatch) throw new Error("Invalid Credentials");
+    if (!passwordMatch) throw new Error("Invalid Credentials. password");
 
     const token = jwt.sign(
         {
