@@ -9,10 +9,7 @@ This project was built while learning real-time communication and full-stack dev
 
 ## 🚀 Live Demo
 
-Frontend (Vercel):
-https://coden-beryl.vercel.app
-
-Backend (Render):
+Render:
 https://coden-backend.onrender.com
 
 ## 🚀 Features
@@ -27,9 +24,6 @@ https://coden-backend.onrender.com
 * Clean socket event handling with proper cleanup
 * MongoDB database integration
 * Save & load code per room
-
-In Progress:
-
 * Authentication (JWT / Session)
 * User accounts
 * Persistent rooms
