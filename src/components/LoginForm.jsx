@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
     const [email, setEmail] = useState("");
@@ -37,7 +38,7 @@ const LoginForm = () => {
                 onChange={(e) => setPassword(e.target.value)}
             />
             <button onClick={handleLogin}>Login</button>
-            <p className="lf-link">Have not registered yet? <a href="/register" className="lf-registerLink">register</a></p>
+            <p className="lf-link">Have not registered yet?<Link className="lf-registerLink" to="/register">register</Link ></p>
         </>
 
     )

@@ -52,7 +52,7 @@ const RegisterForm = () => {
                 onChange={(e) => setLastname(e.target.value)}
             />
             <button onClick={handleRegister}>Register</button>
-            <p className="lf-link">Have already registered? <a href="/login" className="lf-registerLink">login</a></p>
+            <p className="lf-link">Have already registered?<Link className="lf-registerLink" to="/login">login</Link ></p>
         </>
 
     )
